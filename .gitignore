@@ -1,4 +1,10 @@
+downloades/
+vector_db/
 .env
-downloades
-vector_db
 cookies.txt
+.venv/
+__pycache__/
+*.pyc
+*.wav
+*.mp3
+*.m4a
