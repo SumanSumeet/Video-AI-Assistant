@@ -1,18 +1,26 @@
 # 🎬 AI Video Assistant
 
-> **An AI-powered Meeting Intelligence Assistant that transcribes YouTube videos or uploaded audio/video files, generates professional meeting summaries, extracts action items, identifies key decisions, and enables semantic Q&A using Retrieval-Augmented Generation (RAG).**
+![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red?logo=streamlit)
+![LangChain](https://img.shields.io/badge/LangChain-RAG-green)
+![Docker](https://img.shields.io/badge/Docker-Ready-blue?logo=docker)
+![License](https://img.shields.io/badge/License-MIT-yellow)
+
+> **An AI-powered Meeting Intelligence Assistant that transcribes YouTube videos or uploaded audio/video files, generates professional meeting summaries, extracts action items, identifies key decisions, and enables semantic question answering using Retrieval-Augmented Generation (RAG).**
 
 ---
 
-## 🚀 Live Demo
+# 🚀 Project Status
 
-👉 **Hugging Face Space**
+✅ Fully functional and tested locally.
 
-https://huggingface.co/spaces/<your-username>/<space-name>
+🐳 Docker support has been added for containerized execution.
+
+☁️ Cloud deployment is planned for a future update.
 
 ---
 
-## ✨ Features
+# ✨ Features
 
 - 🎥 Analyze YouTube videos
 - 📁 Upload local audio/video files
@@ -24,16 +32,15 @@ https://huggingface.co/spaces/<your-username>/<space-name>
 - 🔑 Extract key decisions
 - ❓ Identify unanswered questions
 - 💬 Chat with meeting transcripts using RAG
-- ⚡ Beautiful Streamlit UI
 - 🧠 ChromaDB Vector Database
-- 🐳 Docker-ready deployment
-- 🤗 Deployable on Hugging Face Spaces
+- ⚡ Modern Streamlit User Interface
+- 🐳 Docker support for containerized execution
 
 ---
 
 # 🏗️ Architecture
 
-```
+```text
                 YouTube / Local File
                          │
                          ▼
@@ -64,36 +71,36 @@ https://huggingface.co/spaces/<your-username>/<space-name>
 
 # 🛠 Tech Stack
 
-### Frontend
+## Frontend
 
 - Streamlit
 
-### AI Models
+## AI Models
 
 - OpenAI Whisper
 - Mistral AI
 - Sarvam AI
 
-### LLM Framework
+## AI Frameworks
 
 - LangChain
 - LangChain LCEL
 
-### Vector Database
+## Vector Database
 
 - ChromaDB
 
-### Embeddings
+## Embedding Model
 
 - HuggingFace Sentence Transformers
 
-### Audio Processing
+## Audio Processing
 
 - yt-dlp
 - FFmpeg
 - pydub
 
-### Language
+## Programming Language
 
 - Python 3.11
 
@@ -101,7 +108,7 @@ https://huggingface.co/spaces/<your-username>/<space-name>
 
 # 📂 Project Structure
 
-```
+```text
 Video-AI-Assistant/
 │
 ├── app.py
@@ -110,6 +117,7 @@ Video-AI-Assistant/
 ├── packages.txt
 ├── Dockerfile
 ├── .dockerignore
+├── .env.example
 ├── README.md
 │
 ├── core/
@@ -130,7 +138,7 @@ Video-AI-Assistant/
 
 # ⚙️ Running Locally
 
-## Clone Repository
+## 1. Clone the Repository
 
 ```bash
 git clone https://github.com/SumanSumeet/Video-AI-Assistant.git
@@ -138,27 +146,29 @@ git clone https://github.com/SumanSumeet/Video-AI-Assistant.git
 cd Video-AI-Assistant
 ```
 
-## Create Virtual Environment
+---
+
+## 2. Create a Virtual Environment
+
+### Windows
 
 ```bash
 python -m venv .venv
-```
 
-Windows
-
-```bash
 .venv\Scripts\activate
 ```
 
-Linux/macOS
+### Linux / macOS
 
 ```bash
+python3 -m venv .venv
+
 source .venv/bin/activate
 ```
 
 ---
 
-## Install Dependencies
+## 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -166,11 +176,13 @@ pip install -r requirements.txt
 
 ---
 
-## Install FFmpeg
+## 4. Install FFmpeg
 
-Download
+Download FFmpeg from
 
 https://ffmpeg.org/download.html
+
+Add FFmpeg to your system PATH.
 
 Verify installation
 
@@ -182,7 +194,7 @@ ffmpeg -version
 
 # 🔑 Environment Variables
 
-Create a `.env` file.
+Create a `.env` file in the project root.
 
 ```env
 MISTRAL_API_KEY=your_api_key
@@ -208,17 +220,17 @@ http://localhost:8501
 
 ---
 
-# 🐳 Docker Deployment
+# 🐳 Running with Docker
 
-This project is fully Dockerized and can be deployed directly to **Hugging Face Docker Spaces**.
+This project includes Docker support for running the application inside a container.
 
-## Build Docker Image
+## Build the Docker Image
 
 ```bash
 docker build -t ai-video-assistant .
 ```
 
-## Run Docker Container
+## Run the Docker Container
 
 ```bash
 docker run -p 7860:7860 ai-video-assistant
@@ -232,31 +244,15 @@ http://localhost:7860
 
 ---
 
-# 🤗 Deploy on Hugging Face Spaces
-
-1. Create a **Docker Space**
-2. Connect your GitHub repository
-3. Add the following Secrets
-
-| Variable | Description |
-|------------|------------|
-| MISTRAL_API_KEY | Mistral API Key |
-| SARVAM_API_KEY | Sarvam API Key |
-| WHISPER_MODEL | Whisper model (small/base) |
-
-Every push to the GitHub repository automatically redeploys the Space.
-
----
-
 # 📥 Supported Inputs
 
-### YouTube URL
+### YouTube Video
 
 ```
 https://www.youtube.com/watch?v=...
 ```
 
-### Audio
+### Audio Files
 
 ```
 meeting.mp3
@@ -264,7 +260,7 @@ meeting.wav
 meeting.m4a
 ```
 
-### Video
+### Video Files
 
 ```
 meeting.mp4
@@ -274,32 +270,47 @@ meeting.avi
 
 ---
 
-# 💬 Chat with the Meeting
+# 💬 Chat with Your Meeting
 
-Ask natural language questions such as:
+After analysis, users can ask natural language questions such as:
 
-- What decisions were made?
+- What were the key decisions?
 - Who is responsible for deployment?
-- What action items remain?
+- What tasks were assigned?
 - Summarize the meeting.
-- What questions are still open?
+- What questions remain unanswered?
 
-The assistant answers strictly using Retrieval-Augmented Generation (RAG) over the meeting transcript.
+The assistant answers strictly from the meeting transcript using Retrieval-Augmented Generation (RAG).
 
 ---
 
-# 📸 UI Preview
+# 📸 Application Preview
 
-Features include
+> Screenshots of the application interface will be added soon.
 
-- 🌙 Modern Dark Theme
-- 🎯 Live Pipeline Status
-- 📝 Transcript Viewer
-- 📋 Meeting Summary
-- ✅ Action Items
-- 🔑 Key Decisions
-- ❓ Open Questions
-- 💬 Interactive RAG Chat
+You can place screenshots inside the `assets/` folder and reference them here.
+
+Example:
+
+```markdown
+![Home](assets/home.png)
+
+![Summary](assets/summary.png)
+
+![Chat](assets/chat.png)
+```
+
+---
+
+# ☁️ Future Deployment
+
+The project has already been Dockerized and is ready for future deployment on platforms such as:
+
+- Azure Container Apps
+- AWS
+- Google Cloud Run
+- Render
+- Railway
 
 ---
 
@@ -312,36 +323,55 @@ Features include
 - Multi-language Translation
 - User Authentication
 - Meeting History
-- AWS Deployment
-- GPU Inference
 - Streaming Transcription
+- GPU Inference
+- Cloud Deployment Pipeline
 
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
+Contributions are welcome!
 
 1. Fork the repository
 2. Create a feature branch
+
+```bash
+git checkout -b feature-name
+```
+
 3. Commit your changes
-4. Push your branch
+
+```bash
+git commit -m "Add new feature"
+```
+
+4. Push to your branch
+
+```bash
+git push origin feature-name
+```
+
 5. Open a Pull Request
 
 ---
 
 # 👨‍💻 Author
 
-**Suman Sumeet**
+## Suman Sumeet
 
-GitHub
+🔗 **GitHub**
 
 https://github.com/SumanSumeet
 
-LinkedIn
+🔗 **LinkedIn**
 
 https://www.linkedin.com/in/suman-sumeet-62b903324/
 
 ---
 
-⭐ If you found this project useful, consider giving it a star!
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Feedback, suggestions, and contributions are always welcome!
