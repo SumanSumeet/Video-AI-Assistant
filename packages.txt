@@ -1,2 +1,5 @@
 ffmpeg
 git
+build-essential
+libgl1
+libglib2.0-0
