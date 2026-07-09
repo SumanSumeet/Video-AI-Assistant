@@ -1,105 +1,164 @@
 # 🎬 AI Video Assistant
 
-An AI-powered Video & Meeting Assistant that can analyze YouTube videos or local audio/video files, generate professional meeting summaries, extract action items, identify key decisions, and let users chat with the meeting using Retrieval-Augmented Generation (RAG).
+> **An AI-powered Meeting Intelligence Assistant that transcribes YouTube videos or uploaded audio/video files, generates professional meeting summaries, extracts action items, identifies key decisions, and enables semantic Q&A using Retrieval-Augmented Generation (RAG).**
+
+---
+
+## 🚀 Live Demo
+
+👉 **Hugging Face Space**
+
+https://huggingface.co/spaces/<your-username>/<space-name>
 
 ---
 
 ## ✨ Features
 
-- 🎥 Analyze YouTube videos or local media files
+- 🎥 Analyze YouTube videos
+- 📁 Upload local audio/video files
 - 🎙️ Automatic Speech-to-Text transcription
-- 🌐 English and Hinglish support
+- 🌐 English & Hinglish support
 - 📝 AI-generated meeting title
 - 📋 Professional meeting summary
 - ✅ Extract action items
 - 🔑 Extract key decisions
 - ❓ Identify unanswered questions
-- 💬 Chat with the meeting transcript using RAG
+- 💬 Chat with meeting transcripts using RAG
 - ⚡ Beautiful Streamlit UI
-- 🧠 ChromaDB Vector Store for semantic search
+- 🧠 ChromaDB Vector Database
+- 🐳 Docker-ready deployment
+- 🤗 Deployable on Hugging Face Spaces
 
 ---
 
-## 🛠 Tech Stack
+# 🏗️ Architecture
+
+```
+                YouTube / Local File
+                         │
+                         ▼
+                Audio Processing
+                         │
+                         ▼
+                  Whisper / Sarvam
+                  Transcription
+                         │
+                         ▼
+                Mistral AI Processing
+                         │
+      ┌──────────────────┼──────────────────┐
+      ▼                  ▼                  ▼
+ Meeting Summary    Action Items     Key Decisions
+      │
+      ▼
+ Generate Embeddings
+      │
+      ▼
+     ChromaDB
+      │
+      ▼
+     RAG Chat Assistant
+```
+
+---
+
+# 🛠 Tech Stack
 
 ### Frontend
+
 - Streamlit
 
 ### AI Models
-- Whisper (OpenAI)
-- Mistral AI
-- Sarvam AI (for Hinglish)
 
-### Frameworks
+- OpenAI Whisper
+- Mistral AI
+- Sarvam AI
+
+### LLM Framework
+
 - LangChain
-- HuggingFace Embeddings
+- LangChain LCEL
+
+### Vector Database
+
 - ChromaDB
 
+### Embeddings
+
+- HuggingFace Sentence Transformers
+
 ### Audio Processing
+
 - yt-dlp
 - FFmpeg
 - pydub
 
-### Programming Language
-- Python 3.11+
+### Language
+
+- Python 3.11
 
 ---
 
-## 📂 Project Structure
+# 📂 Project Structure
 
 ```
-AI-Video-Assistant/
+Video-AI-Assistant/
 │
-├── app.py                 # Streamlit UI
-├── main.py                # CLI entry point
+├── app.py
+├── main.py
 ├── requirements.txt
+├── packages.txt
+├── Dockerfile
+├── .dockerignore
+├── README.md
 │
 ├── core/
-│   ├── transcriber.py
-│   ├── summarizer.py
 │   ├── extractor.py
 │   ├── rag_engine.py
+│   ├── summarizer.py
+│   ├── transcriber.py
 │   └── vector_store.py
 │
 ├── utils/
 │   └── audio_processor.py
 │
-├── downloaded/
-├── vector_db/
-└── README.md
+├── assets/
+└── vector_db/
 ```
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Running Locally
 
-### Clone the repository
+## Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/AI-Video-Assistant.git
+git clone https://github.com/SumanSumeet/Video-AI-Assistant.git
 
-cd AI-Video-Assistant
+cd Video-AI-Assistant
 ```
 
----
-
-### Create Virtual Environment
-
-Windows
+## Create Virtual Environment
 
 ```bash
 python -m venv .venv
 ```
 
-Activate
+Windows
 
 ```bash
 .venv\Scripts\activate
 ```
 
+Linux/macOS
+
+```bash
+source .venv/bin/activate
+```
+
 ---
 
-### Install dependencies
+## Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -107,13 +166,11 @@ pip install -r requirements.txt
 
 ---
 
-### Install FFmpeg
+## Install FFmpeg
 
-Download FFmpeg
+Download
 
 https://ffmpeg.org/download.html
-
-Add FFmpeg to your system PATH.
 
 Verify installation
 
@@ -123,25 +180,21 @@ ffmpeg -version
 
 ---
 
-## 🔑 Environment Variables
+# 🔑 Environment Variables
 
-Create a `.env` file in the root directory.
+Create a `.env` file.
 
 ```env
-MISTRAL_API_KEY=your_mistral_api_key
+MISTRAL_API_KEY=your_api_key
 
-SARVAM_API_KEY=your_sarvam_api_key
+SARVAM_API_KEY=your_api_key
 
 WHISPER_MODEL=small
 ```
 
-> Whisper runs locally, while Mistral and Sarvam require API keys.
-
 ---
 
-## 🚀 Running the Application
-
-### Streamlit UI
+# ▶️ Run the Application
 
 ```bash
 streamlit run app.py
@@ -155,164 +208,140 @@ http://localhost:8501
 
 ---
 
-### Command Line Version
+# 🐳 Docker Deployment
+
+This project is fully Dockerized and can be deployed directly to **Hugging Face Docker Spaces**.
+
+## Build Docker Image
 
 ```bash
-python main.py
+docker build -t ai-video-assistant .
+```
+
+## Run Docker Container
+
+```bash
+docker run -p 7860:7860 ai-video-assistant
+```
+
+Open
+
+```
+http://localhost:7860
 ```
 
 ---
 
-## 🎯 Supported Inputs
+# 🤗 Deploy on Hugging Face Spaces
 
-- YouTube URL
+1. Create a **Docker Space**
+2. Connect your GitHub repository
+3. Add the following Secrets
+
+| Variable | Description |
+|------------|------------|
+| MISTRAL_API_KEY | Mistral API Key |
+| SARVAM_API_KEY | Sarvam API Key |
+| WHISPER_MODEL | Whisper model (small/base) |
+
+Every push to the GitHub repository automatically redeploys the Space.
+
+---
+
+# 📥 Supported Inputs
+
+### YouTube URL
 
 ```
 https://www.youtube.com/watch?v=...
 ```
 
-- Local video
+### Audio
 
 ```
-video.mp4
-```
-
-- Local audio
-
-```
-meeting.wav
 meeting.mp3
+meeting.wav
+meeting.m4a
+```
+
+### Video
+
+```
+meeting.mp4
+meeting.mov
+meeting.avi
 ```
 
 ---
 
-## 🔄 Workflow
+# 💬 Chat with the Meeting
 
-```
-Input Video
-      │
-      ▼
-Extract Audio
-      │
-      ▼
-Chunk Audio
-      │
-      ▼
-Transcription
-(Whisper / Sarvam)
-      │
-      ▼
-Generate Title
-      │
-      ▼
-Meeting Summary
-      │
-      ▼
-Extract
-• Action Items
-• Decisions
-• Questions
-      │
-      ▼
-Create Embeddings
-      │
-      ▼
-Store in ChromaDB
-      │
-      ▼
-RAG Chat Assistant
-```
+Ask natural language questions such as:
 
----
-
-## 💬 Chat with Meeting
-
-After analysis, users can ask questions like:
-
-- What were the key decisions?
-- What tasks were assigned?
+- What decisions were made?
 - Who is responsible for deployment?
-- What is the project deadline?
-- Summarize the entire meeting.
-- What questions remain unanswered?
+- What action items remain?
+- Summarize the meeting.
+- What questions are still open?
 
-The assistant answers strictly from the meeting transcript using Retrieval-Augmented Generation (RAG).
-
----
-
-## 📸 UI
-
-The application includes
-
-- Modern dark-themed Streamlit interface
-- Live processing status
-- Expandable transcript viewer
-- AI-generated meeting summary
-- Action items
-- Key decisions
-- Open questions
-- Interactive chat interface
+The assistant answers strictly using Retrieval-Augmented Generation (RAG) over the meeting transcript.
 
 ---
 
-## 📦 Major Libraries
+# 📸 UI Preview
 
-- Streamlit
-- Whisper
-- LangChain
-- ChromaDB
-- HuggingFace Embeddings
-- Mistral AI
-- Sarvam AI
-- yt-dlp
-- pydub
-- FFmpeg
+Features include
+
+- 🌙 Modern Dark Theme
+- 🎯 Live Pipeline Status
+- 📝 Transcript Viewer
+- 📋 Meeting Summary
+- ✅ Action Items
+- 🔑 Key Decisions
+- ❓ Open Questions
+- 💬 Interactive RAG Chat
 
 ---
 
-## 🔮 Future Improvements
+# 🔮 Future Improvements
 
 - Speaker Diarization
-- PDF Report Export
+- PDF Export
 - DOCX Export
 - Meeting Timeline
 - Multi-language Translation
-- Cloud Deployment
-- Authentication
+- User Authentication
 - Meeting History
-- Docker Support
 - AWS Deployment
+- GPU Inference
+- Streaming Transcription
 
 ---
 
-## 🤝 Contributing
+# 🤝 Contributing
 
-Contributions are welcome!
+Contributions are welcome.
 
 1. Fork the repository
-2. Create a new feature branch
+2. Create a feature branch
 3. Commit your changes
-4. Push to your branch
+4. Push your branch
 5. Open a Pull Request
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License.
-
----
-
-## 👨‍💻 Author
+# 👨‍💻 Author
 
 **Suman Sumeet**
 
-GitHub:
+GitHub
+
 https://github.com/SumanSumeet
 
-LinkedIn:
+LinkedIn
+
 https://www.linkedin.com/in/suman-sumeet-62b903324/
 
 ---
 
-⭐ If you found this project useful, please consider giving it a star!
+⭐ If you found this project useful, consider giving it a star!
